@@ -1,5 +1,6 @@
 #define MAX_PESSOAS 30
 #define QTD_PREF 6
+#define TAM_NOME 50
 void moldura();
 void opcoes();
 void formt(int q);
