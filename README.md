@@ -1,20 +1,21 @@
 Pendente para a finalização da V1
 
-Cadastrar Pessoas ✔ (Terminado [função depende da "LerNotaValida()" para cadastrar as notas)
+1 - Cadastrar Pessoas ✔ (Terminado [função depende da "LerNotaValida()" para cadastrar as notas)
 
 
-Exibir pessoas e preferências X
+2 - Exibir pessoas e preferências X
 
-Buscar pessoa pelo nome ✔ (retorna a pos i onde o nome da pessoa está)
+3 - Buscar pessoa pelo nome ✔ (retorna a pos i onde o nome da pessoa está)
 
-Comparar duas pessoas ✔ (Funciona de acordo com os exemplos que a professora deixou no docx)
-
-
-Encontrar pessoa mais semelhante X
+4 - Comparar duas pessoas ✔ (Funciona de acordo com os exemplos que a professora deixou no docx)
 
 
-Exibir ranking de afinidade X
-Analisar preferências de duas pesssoas X
+5 - Encontrar pessoa mais semelhante X
+
+
+6 - Exibir ranking de afinidade X
+
+7 - Analisar preferências de duas pesssoas X
 
 favor avisar no grupo wpp para que n haja repetições de tarefas
 
