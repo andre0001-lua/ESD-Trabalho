@@ -5,10 +5,7 @@
 #include "func.h"
 #include <stdio.h>
 int main() {
+  
+  menu(nomes, notas, *quant);
 
-  moldura();
-  printf("\n         SISTEMA DE AFINIDADES\n");
-  moldura();
-  formt(2);
-  opcoes();
 }
