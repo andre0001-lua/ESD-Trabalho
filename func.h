@@ -10,3 +10,4 @@ float CalcularDistancia(float notas[][QTD_PREF], int pont1, int pont2);
 void CadastrarPessoas(char nomes[][TAM_NOME], float notas[][QTD_PREF], int *quant);
 void menu(char nomes[][TAM_NOME], float notas[][QTD_PREF], int *quant);
 void CompararDuasPessoas(char nomes[][TAM_NOME], float notas[][QTD_PREF], int quant);
+void ExibirPessoas(char nomes[][TAM_NOME], float notas[][QTD_PREF], int quant);

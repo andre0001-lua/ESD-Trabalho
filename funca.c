@@ -35,6 +35,7 @@ void menu(char nomes[][TAM_NOME], float notas[][QTD_PREF], int *quant) {
 
             case 2:
                 // Exibir pessoas e preferências
+                ExibirPessoas(nomes, notas, *quant);
                 break;
 
             case 3:
@@ -103,9 +104,13 @@ void CadastrarPessoas(char nomes[][TAM_NOME], float notas[][QTD_PREF], int *quan
   }
   else {valido = 1;}
 }
+
+  while(getchar() != '\n');
+
   for(int j = *quant; j < *quant + novos; j++) {
     printf("Digite o nome da pessoa: ");
     scanf("%49[^\n]", nomes[j]);
+    while(getchar() != '\n');
     for(int k = 0; k < QTD_PREF; k++) {
       printf("Digite a nota para a preferencia %d: ", k + 1);
       notas[j][k] = LerNotaValida();
@@ -114,6 +119,45 @@ void CadastrarPessoas(char nomes[][TAM_NOME], float notas[][QTD_PREF], int *quan
   *quant = *quant + novos;
 }
 
+void ExibirPessoas(char nomes[][TAM_NOME], float notas[][QTD_PREF], int quant)
+{
+  if (quant == 0)
+  {
+    printf("Nenhuma pessoa cadastrada ainda.\n");
+    return;
+  }
+
+  int maiorNome = 4;
+
+  for (int i = 0; i < quant; i++)
+  {
+    int tam = strlen(nomes[i]);
+    if (tam > maiorNome)
+    {
+      maiorNome = tam;
+    }
+  }
+
+  moldura();
+  formt(1);
+  printf("%-*s %6s %6s %6s %6s %6s %6s\n", maiorNome, "NOME", "MUS", "CIN", "JOG", "ESP", "LEI", "PROG");
+  moldura();
+  formt(1);
+
+  for (int i = 0; i < quant; i++)
+  {
+    printf("%-*s", maiorNome, nomes[i]);
+    for (int j = 0; j < QTD_PREF; j++)
+    {
+      printf(" %6.1f", notas[i][j]);
+    }
+    printf("\n");
+  }
+
+  moldura();
+  formt(1);
+
+}
 
 float LerNotaValida() {
   float nota;
