@@ -112,6 +112,7 @@ void CadastrarPessoas(char nomes[][TAM_NOME], float notas[][QTD_PREF], int *quan
     printf("Digite o nome da pessoa: ");
     scanf("%49[^\n]", nomes[j]);
     while(getchar() != '\n');
+    formt(1);
     for(int k = 0; k < QTD_PREF; k++) {
       printf("Digite a nota para a preferencia %d: ", k + 1);
       notas[j][k] = LerNotaValida();
