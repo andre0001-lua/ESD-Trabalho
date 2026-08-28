@@ -8,7 +8,7 @@ Pendente para a finalização da V1
 
 4 - Comparar duas pessoas ✔ (Funciona de acordo com os exemplos que a professora deixou no docx)
 
-5 - Encontrar pessoa mais semelhante X
+5 - Encontrar pessoa mais semelhante ✔ (busca a pessoa mais próxima da referência por menor distância euclidiana, ignorando a comparação dela consigo mesma)
 
 6 - Exibir ranking de afinidade X
 
