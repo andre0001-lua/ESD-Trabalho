@@ -18,12 +18,10 @@ void menu(char nomes[][TAM_NOME], float notas[][QTD_PREF], int *quant) {
 
     while (i != 0) {
         moldura();
-        printf("SISTEMA DE AFINIDADE");
+        printf("        SISTEMA DE AFINIDADES\n");
         moldura();
         formt(1);
-        moldura();
         opcoes();
-        moldura();
         printf("Digite a opção desejada: ");
         scanf("%d", &i);
         formt(1);
@@ -45,6 +43,7 @@ void menu(char nomes[][TAM_NOME], float notas[][QTD_PREF], int *quant) {
                 } else {
                     printf("%s encontrada na posição: %d\n", nomes[posicaoPessoa], posicaoPessoa);
                 }
+                formt(10);
                 break;
 
             case 4:
@@ -58,10 +57,12 @@ void menu(char nomes[][TAM_NOME], float notas[][QTD_PREF], int *quant) {
 
             case 6:
                 // Exibir ranking de afinidade
+                ExibirRankingAfinidade(nomes, notas, *quant);
                 break;
 
             case 7:
                 // Analisar preferências de duas pessoas
+                formt(10);
                 break;
 
             case 0:
@@ -70,17 +71,18 @@ void menu(char nomes[][TAM_NOME], float notas[][QTD_PREF], int *quant) {
 
             default:
                 printf("Opção inválida. Tente novamente.\n");
+                formt(10);
                 break;
         }   
     }
 }
 
-void moldura() { printf("========================================"); }
+void moldura() { printf("========================================\n"); }
 void opcoes() {
   printf("1 - Cadastrar Pessoas\n");
   printf("2 - Exibir pessoas e preferências\n");
   printf("3 - Buscar pessoa pelo nome\n");
-  printf("4 - Comparar duas pessoas");
+  printf("4 - Comparar duas pessoas\n");
   printf("5 - Encontrar pessoa mais semelhante\n");
   printf("6 - Exibir ranking de afinidade\n");
   printf("7 - Analisar preferências de duas pesssoas\n");
@@ -116,8 +118,10 @@ void CadastrarPessoas(char nomes[][TAM_NOME], float notas[][QTD_PREF], int *quan
       printf("Digite a nota para a preferencia %d: ", k + 1);
       notas[j][k] = LerNotaValida();
     }
+    while(getchar() != '\n');
   }
   *quant = *quant + novos;
+  formt(10);
 }
 
 void ExibirPessoas(char nomes[][TAM_NOME], float notas[][QTD_PREF], int quant)
@@ -125,6 +129,7 @@ void ExibirPessoas(char nomes[][TAM_NOME], float notas[][QTD_PREF], int quant)
   if (quant == 0)
   {
     printf("Nenhuma pessoa cadastrada ainda.\n");
+    formt(10);
     return;
   }
 
@@ -156,7 +161,7 @@ void ExibirPessoas(char nomes[][TAM_NOME], float notas[][QTD_PREF], int quant)
   }
 
   moldura();
-  formt(1);
+  formt(10);
 
 }
 
@@ -183,6 +188,7 @@ void CompararDuasPessoas(char nomes[][TAM_NOME], float notas[][QTD_PREF], int qu
 
     if (pos1 == -1 || pos2 == -1) {
         printf("Não foi possível comparar: uma ou ambas as pessoas não foram encontradas.\n");
+        formt(10);
         return;
     }
 
@@ -194,6 +200,7 @@ void CompararDuasPessoas(char nomes[][TAM_NOME], float notas[][QTD_PREF], int qu
     formt(1);
     printf("%s X %s\n", nomes[pos1], nomes[pos2]);
     printf("Distância: %.2f\n", dist);
+    formt(10);
 }
 
 void EncontrarMaisSemelhante(char nomes[][TAM_NOME], float notas[][QTD_PREF], int quant)
@@ -201,6 +208,7 @@ void EncontrarMaisSemelhante(char nomes[][TAM_NOME], float notas[][QTD_PREF], in
   if (quant < 2)
   {
     printf ("É necessário ter pelo menos 2 pessoas cadastradas para essa busca.\n");
+    formt(10);
     return;
   }
 
@@ -210,6 +218,7 @@ void EncontrarMaisSemelhante(char nomes[][TAM_NOME], float notas[][QTD_PREF], in
   if (ref == -1) 
   {
     printf ("Pessoa não encontrada.\n");
+    formt(10);
     return;
   }
 
@@ -246,6 +255,7 @@ void EncontrarMaisSemelhante(char nomes[][TAM_NOME], float notas[][QTD_PREF], in
   printf ("----------------------------------\n");
   printf ("%s\n", nomes[maisSemelhante]);
   printf ("Distância: %.2f\n", menorDistancia);
+  formt(10);
 
 }
 
@@ -271,4 +281,63 @@ float CalcularDistancia(float notas[][QTD_PREF], int pont1, int pont2) {
   }
 
   return sqrt(soma);
+}
+
+void ExibirRankingAfinidade(char nomes[][TAM_NOME], float notas[][QTD_PREF], int quant){
+  if (quant <2){
+    printf("É necessário ter pelo menos 2 pessoas cadastradas para essa busca.\n");
+    formt(10);
+    return;
+  }
+
+  printf("Pessoa de referência\n");
+  int ref = BuscaPessoa(nomes, quant);
+
+  if (ref == -1){
+    printf ("Pessoa não encontrada.\n");
+    formt(10);
+    return;
+  }
+
+  float distancias[MAX_PESSOAS];
+  int indices[MAX_PESSOAS];
+  int total = 0;
+
+  for (int i = 0; i < quant; i++){
+    if (i == ref) continue;
+ 
+
+  distancias[total] = CalcularDistancia(notas, ref, i);
+  indices[total] = i;
+  total++;
+  }
+
+  for (int i = 0; i < total - 1; i++){
+    int menor = i;
+    for (int j = i + 1; j < total; j++){
+      if (distancias[j] < distancias[menor]) menor = j;
+    }
+
+    if (menor != i) {
+      float distanciaTemp = distancias[i];
+      distancias[i] = distancias[menor];
+      distancias[menor] = distanciaTemp;
+
+      int indiceTemp = indices[i];
+      indices[i] = indices[menor];
+      indices[menor] = indiceTemp;
+    }
+  }
+
+  formt(1);
+  moldura();
+  printf("Perfis mais proximos de %s\n", nomes[ref]);
+  moldura();
+  formt(1);
+
+  for (int i = 0; i < total; i++){
+    printf("%d - %-20s ............... %.2f\n", i + 1, nomes[indices[i]], distancias[i]);
+  }
+
+  formt(10);
 }
