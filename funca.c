@@ -53,6 +53,7 @@ void menu(char nomes[][TAM_NOME], float notas[][QTD_PREF], int *quant) {
 
             case 5:
                 // Encontrar pessoa mais semelhante
+                EncontrarMaisSemelhante(nomes, notas, *quant);
                 break;
 
             case 6:
@@ -195,6 +196,58 @@ void CompararDuasPessoas(char nomes[][TAM_NOME], float notas[][QTD_PREF], int qu
     printf("Distância: %.2f\n", dist);
 }
 
+void EncontrarMaisSemelhante(char nomes[][TAM_NOME], float notas[][QTD_PREF], int quant)
+{
+  if (quant < 2)
+  {
+    printf ("É necessário ter pelo menos 2 pessoas cadastradas para essa busca.\n");
+    return;
+  }
+
+  printf ("Pessoa de referência\n");
+  int ref = BuscaPessoa(nomes, quant);
+
+  if (ref == -1) 
+  {
+    printf ("Pessoa não encontrada.\n");
+    return;
+  }
+
+  int maisSemelhante= -1;
+  float menorDistancia = -1;
+
+  moldura ();
+  printf ("BUSCA DE PERFIS SEMELHANTES\n");
+  moldura();
+  formt(1);
+  printf ("Pessoa de referencia: %s\n", nomes[ref]);
+  formt(1);
+
+  for (int i =0; i < quant; i++)
+  {
+    if (i == ref)
+    {
+      continue;
+    }
+
+    float dist = CalcularDistancia(notas, ref, i);
+    printf ("Distância para %s: %.2f\n", nomes[i], dist);
+
+    if (maisSemelhante == -1 || dist < menorDistancia)
+    {
+      maisSemelhante = i;
+      menorDistancia = dist;
+    }
+  }
+
+  formt(1);
+  printf ("----------------------------------\n");
+  printf ("PERFIL MAIS SEMELHANTE\n");
+  printf ("----------------------------------\n");
+  printf ("%s\n", nomes[maisSemelhante]);
+  printf ("Distância: %.2f\n", menorDistancia);
+
+}
 
 int BuscaPessoa(char nomes[][TAM_NOME], int quant) {
     char nomebuscando[TAM_NOME];
