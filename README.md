@@ -14,6 +14,8 @@ Pendente para a finalização da V1
 
 7 - Analisar preferências de duas pesssoas X
 
+Testes Gerais - X
+
 favor avisar no grupo wpp para que n haja repetições de tarefas
 
 data de entrega 4 de setembro
