@@ -12,7 +12,7 @@ Pendente para a finalização da V1
 
 6 - Exibir ranking de afinidade ✔ (Isso aí tropa acredito que está tundo nos trilhos)
 
-7 - Analisar preferências de duas pesssoas X
+7 - Analisar preferências de duas pesssoas ✔
 
 Testes Gerais - X
 
