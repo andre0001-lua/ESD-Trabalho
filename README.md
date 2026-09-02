@@ -10,9 +10,11 @@ Pendente para a finalização da V1
 
 5 - Encontrar pessoa mais semelhante ✔ (busca a pessoa mais próxima da referência por menor distância euclidiana, ignorando a comparação dela consigo mesma)
 
-6 - Exibir ranking de afinidade X
+6 - Exibir ranking de afinidade ✔ (Isso aí tropa acredito que está tundo nos trilhos)
 
 7 - Analisar preferências de duas pesssoas X
+
+Testes Gerais - X
 
 favor avisar no grupo wpp para que n haja repetições de tarefas
 

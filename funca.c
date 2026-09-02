@@ -1,5 +1,6 @@
 //v1
 //André Luís Paiva
+//Erik Soares Mendonça
 //Roberto Alves Antunes
 //Rafael Costa Oliveira
 #include "func.h"
