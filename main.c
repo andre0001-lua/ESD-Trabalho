@@ -4,7 +4,7 @@
 //Roberto Alves Antunes
 //Rafael Costa Oliveira
 
-#include "func.h"
+#include "V1_AndreLuis_ErikSoares_RafaelCosta_RobertoAlves.h"
 #include <stdio.h>
 
 int main() {

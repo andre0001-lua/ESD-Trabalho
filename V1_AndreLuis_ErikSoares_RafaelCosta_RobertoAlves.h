@@ -28,10 +28,9 @@ void EncontrarMaisSemelhante(char nomes[][TAM_NOME], float notas[][QTD_PREF], in
 void CompararDuasPessoas(char nomes[][TAM_NOME], float notas[][QTD_PREF], int quant);
 // Exibe todos os nomes e suas notas em formato tabular com cabeçalho alinhado.
 void ExibirPessoas(char nomes[][TAM_NOME], float notas[][QTD_PREF], int quant);
-<<<<<<< HEAD
+
 void ExibirRankingAfinidade(char nomes[][TAM_NOME], float notas[][QTD_PREF], int quant);
+
 void AnalisarPreferencias(char nomes[][TAM_NOME], float notas[][QTD_PREF], int quant);
-=======
 // Gera e exibe uma lista ordenada dos perfis mais próximos a uma pessoa de referência (menor para maior distância).
 void ExibirRankingAfinidade(char nomes[][TAM_NOME], float notas[][QTD_PREF], int quant);
->>>>>>> ad859e3b2b4d66a43ab5a0047f9a093e6550f5f3
