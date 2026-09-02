@@ -62,7 +62,7 @@ void menu(char nomes[][TAM_NOME], float notas[][QTD_PREF], int *quant) {
 
             case 7:
                 // Analisar preferências de duas pessoas
-                formt(10);
+                AnalisarPreferencias(nomes, notas, *quant);
                 break;
 
             case 0:
@@ -340,4 +340,59 @@ void ExibirRankingAfinidade(char nomes[][TAM_NOME], float notas[][QTD_PREF], int
   }
 
   formt(10);
+}
+ 
+void AnalisarPreferencias(char nomes[][TAM_NOME], float notas[][QTD_PREF], int quant){
+  static const char *nomesPref[QTD_PREF] = {
+    "Musica", "Cinema", "Jogos", "Esportes", "Leitura", "Programacao"
+  };
+ 
+  printf ("Primeira pessoa\n");
+  int pos1 = BuscaPessoa(nomes, quant);
+ 
+  printf ("Segunda pessoa\n");
+  int pos2 = BuscaPessoa(nomes, quant);
+ 
+  if (pos1 == -1 || pos2 == -1){
+    printf ("Não foi possível analisar: uma ou ambas as pessoas não foram encontradas.\n");
+    return;
+  }
+ 
+  float diferencas[QTD_PREF];
+  float menorDiferenca = -1;
+  
+  formt(1);
+  moldura();
+  printf ("ANALISE DE PERFIS\n");
+  moldura();
+  formt(1);
+  printf ("%s X %s\n", nomes[pos1], nomes[pos2]);
+  formt(1);
+ 
+  printf ("%-12s %10s %10s %10s\n", "Preferencia", nomes[pos1], nomes[pos2], "Diferenca");
+  printf ("-----------------------------------------------\n");
+ 
+  for (int j = 0; j < QTD_PREF; j++){
+    float diff = fabs(notas[pos1][j] - notas[pos2][j]);
+    diferencas[j] = diff;
+ 
+    printf ("%-12s %10.1f %10.1f %10.1f\n", nomesPref[j], notas[pos1][j], notas[pos2][j], diff);
+     //aproveita o mesmo laço pra já ir guardando a menor diferença encontrada
+    if (menorDiferenca == -1 || diff < menorDiferenca){
+      menorDiferenca = diff;
+    }
+  }
+ 
+  printf ("-----------------------------------------------\n");
+  printf ("Distância euclidiana: %.2f\n", CalcularDistancia(notas, pos1, pos2));
+
+  formt(1);
+  printf ("Preferencias mais semelhantes:\n");
+ 
+  //percorre de novo para listar todas as que empataram no menor valor
+  for (int j = 0; j < QTD_PREF; j++){
+    if (diferencas[j] == menorDiferenca){
+      printf ("%s\n", nomesPref[j]);
+    }
+  }
 }

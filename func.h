@@ -13,3 +13,4 @@ void menu(char nomes[][TAM_NOME], float notas[][QTD_PREF], int *quant);
 void CompararDuasPessoas(char nomes[][TAM_NOME], float notas[][QTD_PREF], int quant);
 void ExibirPessoas(char nomes[][TAM_NOME], float notas[][QTD_PREF], int quant);
 void ExibirRankingAfinidade(char nomes[][TAM_NOME], float notas[][QTD_PREF], int quant);
+void AnalisarPreferencias(char nomes[][TAM_NOME], float notas[][QTD_PREF], int quant);
