@@ -1,19 +1,42 @@
-//v1
+//v2
 //André Luís Paiva
 //Erik Soares Mendonça
 //Roberto Alves Antunes
 //Rafael Costa Oliveira
 
-#include "V1_AndreLuis_ErikSoares_RafaelCosta_RobertoAlves.h"
+#include "V2_AndreLuis_ErikSoares_RafaelCosta_RobertoAlves.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 int main() {
-  
-  char nomes[MAX_PESSOAS][TAM_NOME];
-  float notas[MAX_PESSOAS][QTD_PREF];
-  int quant = 0;
-  int menu = -1;
-  int posicaoPessoa;
+
+    float *notas = NULL;
+    char (*nomes)[TAM_NOME] = NULL;
+    
+    int quant = 0;
+    int menu = -1;
+    int posicaoPessoa;
+    int capacidade = 0;
+
+
+    while (capacidade <= 0) {
+        printf("Qual sera a capacidade maxima de pessoas permitidas a se cadastrar? ");
+        if (scanf("%d", &capacidade) != 1 || capacidade <= 0) {
+            printf("Valor invalido! Digite um numero positivo.\n");
+            while (getchar() != '\n');
+        }
+    }
+
+    // Alocação dinâmica de notas e nomes
+    notas = (float *) malloc(capacidade * QTD_PREF * sizeof(float));
+    nomes = malloc(capacidade * sizeof(*nomes));
+
+    if (notas == NULL || nomes == NULL) {
+        printf("Erro: falha ao alocar memoria!\n");
+        if (notas != NULL) free(notas);
+        if (nomes != NULL) free(nomes);
+        return 1;
+    }
 
     while (menu) {
         moldura();
@@ -27,7 +50,7 @@ int main() {
 
         switch (menu) {
             case 1:
-                CadastrarPessoas(nomes, notas, &quant);
+                CadastrarPessoas(nomes, notas, &quant, capacidade);
                 break;
 
             case 2:
@@ -61,12 +84,11 @@ int main() {
 
             case 7:
                 // Analisar preferências de duas pessoas
-                formt(10);
+                AnalisarPreferencias(nomes, notas, quant);
                 break;
 
             case 0:
                 printf("Saindo do programa...\n");
-                menu = 0;
                 break;
 
             default:
@@ -75,6 +97,11 @@ int main() {
                 break;
         }   
     }
+
+    free(notas);
+    free(nomes);
+    notas = NULL;
+    nomes = NULL;
 
   return 0;
 }
