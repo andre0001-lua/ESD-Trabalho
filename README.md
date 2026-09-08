@@ -44,7 +44,8 @@ Pendente no relatório
 
 f) Que problema a `struct Pessoa` resolve?
 
-    R-
+    R- Resolve o problema de sincronização entre estruturas paralelas, que enfrentamos nas versões anteriores. Ao agrupar nome e notas em um único registro, garantimos que os dados de uma pessoa fiquem sempre vinculados entre si, eliminando o risco de operações (como ordenações ou reorganizações) desalinharem o nome de uma pessoa das notas de outra.
+
     
 g) Qual é a diferença entre:
 
@@ -52,7 +53,7 @@ g) Qual é a diferença entre:
     
     e um vetor de pessoas criado com `malloc`?
     
-    R-
+    R- No primeiro caso, o vetor tem tamanho fixo definido em tempo de compilação e é alocado na pilha (stack): a memória para as 30 pessoas é reservada automaticamente assim que a função começa a executar, e liberada automaticamente quando ela termina. Já um vetor criado com malloc é alocado dinamicamente no heap, em tempo de execução, permitindo que o tamanho seja definido conforme a necessidade real (por exemplo, a quantidade de pessoas informada pelo usuário). Essa flexibilidade tem um custo: a responsabilidade de liberar essa memória manualmente com free() passa a ser do programador, e a alocação também deve ser verificada quanto a falhas (ponteiro NULL).
     
 h) Qual é a diferença conceitual entre:
 
