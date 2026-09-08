@@ -6,15 +6,15 @@
 
 #include "V4_AndreLuis_ErikSoares_RafaelCosta_RobertoAlves.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 int main() {
 
-    
-  Pessoa *pessoas = NULL;
-  int quant = 0;
-  int opcao = -1;
-  int capacidade = 0;
-  int posicaoPessoa;
+    Pessoa *pessoas = NULL;
+    int quant = 0;
+    int opcao = -1;
+    int capacidade = 0;
+    int posicaoPessoa;
 
     while (capacidade <= 0) {
         printf("Qual sera a capacidade maxima de pessoas permitidas a se cadastrar? ");
@@ -25,6 +25,10 @@ int main() {
     }
 
     pessoas = (Pessoa *) malloc(capacidade * sizeof(Pessoa));
+    if (pessoas == NULL) {
+        printf("Erro: falha ao alocar memoria para pessoas!\n");
+        return 1;
+    }
 
     while (opcao != 0) {
         formt(5);
@@ -35,6 +39,7 @@ int main() {
         opcoes();
         printf("Digite a opção desejada: ");
         scanf("%d", &opcao);
+        while (getchar() != '\n');
         formt(1);
 
         switch (opcao) {
@@ -53,7 +58,6 @@ int main() {
                     printf("Pessoa não encontrada.\n");
                 } else {
                     printf("%s encontrada na posição: %d\n", pessoas[posicaoPessoa].nome, posicaoPessoa);
-
                 }
                 formt(10);
                 break;
@@ -88,5 +92,8 @@ int main() {
         }   
     }
 
-  return 0;
+    free(pessoas);
+    pessoas = NULL;
+
+    return 0;
 }

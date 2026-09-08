@@ -1,10 +1,11 @@
-//v3
+//v4
 //André Luís Paiva
 //Erik Soares Mendonça
 //Roberto Alves Antunes
 //Rafael Costa Oliveira
-#include "V3_AndreLuis_ErikSoares_RafaelCosta_RobertoAlves.h"
+#include "V4_AndreLuis_ErikSoares_RafaelCosta_RobertoAlves.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <math.h>
 
@@ -63,12 +64,12 @@ void CadastrarPessoas(Pessoa pessoas[], int *quant, int capacidade) {
 
     for (int j = *quant; j < *quant + novos; j++) {
         printf("Digite o nome da pessoa %d: ", j + 1);
-        scanf("%49[^\n]", pessoas[j]);
+        scanf("%49[^\n]", pessoas[j].nome);
         while (getchar() != '\n');
 
         for (int k = 0; k < QTD_PREF; k++) {
             printf("Digite a nota para a preferencia %d: ", k + 1);
-            pessoas->notas[j * QTD_PREF + k] = LerNotaValida();
+            pessoas[j].notas[k] = LerNotaValida();
         }
         while (getchar() != '\n');
     }
@@ -119,9 +120,14 @@ void ExibirPessoas(Pessoa pessoas[], int quant)
 }
 
 int BuscaPessoa(Pessoa pessoas[], int quant){
+	if (quant == 0) {
+		return -1;
+	}
+
 	char nomeBuscando[TAM_NOME];
 	printf("Digite o nome que deseja buscar: ");
-	scanf("%s", nomeBuscando);
+	scanf("%49[^\n]", nomeBuscando);
+	while (getchar() != '\n');
 
 	for (int i=0; i<quant; i++){
 		if (strcmp(pessoas[i].nome, nomeBuscando) == 0){
@@ -141,6 +147,12 @@ float CalcularDistancia(Pessoa pessoas[], int pos1, int pos2){
 }
 
 void CompararDuasPessoas(Pessoa pessoas[], int quant) {
+	if (quant < 2) {
+		printf("É necessário ter pelo menos 2 pessoas cadastradas para essa comparação.\n");
+		formt(10);
+		return;
+	}
+
 	float dist;
 
 	printf("Primeira pessoa\n");
@@ -258,7 +270,6 @@ void ExibirRankingAfinidade(Pessoa pessoas[], int quant) {
 	for (int i = 0; i < quant; i++) {
 		if (i == ref) continue;
 
-
 		distancias[total] = CalcularDistancia(pessoas, ref, i);
 		indices[total] = i;
 		total++;
@@ -296,6 +307,12 @@ void ExibirRankingAfinidade(Pessoa pessoas[], int quant) {
 }
 
 void AnalisarPreferencias(Pessoa pessoas[], int quant) {
+	if (quant < 2) {
+		printf("É necessário ter pelo menos 2 pessoas cadastradas para essa análise.\n");
+		formt(10);
+		return;
+	}
+
 	static const char *nomesPref[QTD_PREF] = {
 		"Musica", "Cinema", "Jogos", "Esportes", "Leitura", "Programacao"
 	};
@@ -348,4 +365,6 @@ void AnalisarPreferencias(Pessoa pessoas[], int quant) {
 			printf ("%s\n", nomesPref[j]);
 		}
 	}
+
+	formt(10);
 }

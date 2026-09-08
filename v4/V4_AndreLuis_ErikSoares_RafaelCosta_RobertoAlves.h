@@ -1,8 +1,11 @@
-//v3
+//v4
 //André Luís Paiva
 //Erik Soares Mendonça
 //Roberto Alves Antunes
 //Rafael Costa Oliveira
+
+#ifndef V4_ANDRELUIS_ERIKSOARES_RAFAELCOSTA_ROBERTOALVES_H
+#define V4_ANDRELUIS_ERIKSOARES_RAFAELCOSTA_ROBERTOALVES_H
 
 #define MAX_PESSOAS 30
 #define QTD_PREF 6
@@ -37,3 +40,5 @@ void ExibirPessoas(Pessoa pessoas[], int quant);
 void ExibirRankingAfinidade(Pessoa pessoas[], int quant);
 
 void AnalisarPreferencias(Pessoa pessoas[], int quant);
+
+#endif
