@@ -3,6 +3,7 @@
 //Erik Soares Mendonça
 //Roberto Alves Antunes
 //Rafael Costa Oliveira
+
 #include "V4_AndreLuis_ErikSoares_RafaelCosta_RobertoAlves.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -197,7 +198,12 @@ void EncontrarMaisSemelhante(Pessoa pessoas[], int quant)
 		return;
 	}
 
-	float distancias[MAX_PESSOAS];
+	float *distancias = (float *) malloc(quant * sizeof(float));
+	if (distancias == NULL) {
+		printf("Erro de alocação temporária.\n");
+		return;
+	}
+
 	float menorDistancia = -1;
 
 	moldura ();
@@ -243,12 +249,13 @@ void EncontrarMaisSemelhante(Pessoa pessoas[], int quant)
 	}
 
 	printf ("Distância: %.2f\n", menorDistancia);
+	free(distancias);
 	formt(10);
 
 }
 
 void ExibirRankingAfinidade(Pessoa pessoas[], int quant) {
-	if (quant <2) {
+	if (quant < 2) {
 		printf("É necessário ter pelo menos 2 pessoas cadastradas para essa busca.\n");
 		formt(10);
 		return;
@@ -263,8 +270,16 @@ void ExibirRankingAfinidade(Pessoa pessoas[], int quant) {
 		return;
 	}
 
-	float distancias[MAX_PESSOAS];
-	int indices[MAX_PESSOAS];
+	float *distancias = (float *) malloc((quant - 1) * sizeof(float));
+	int *indices = (int *) malloc((quant - 1) * sizeof(int));
+
+	if (distancias == NULL || indices == NULL) {
+		printf("Erro de alocação temporária.\n");
+		if (distancias != NULL) free(distancias);
+		if (indices != NULL) free(indices);
+		return;
+	}
+
 	int total = 0;
 
 	for (int i = 0; i < quant; i++) {
@@ -303,6 +318,8 @@ void ExibirRankingAfinidade(Pessoa pessoas[], int quant) {
 
 	}
 
+	free(distancias);
+	free(indices);
 	formt(10);
 }
 
@@ -347,7 +364,6 @@ void AnalisarPreferencias(Pessoa pessoas[], int quant) {
 		diferencas[j] = diff;
 
 		printf("%-12s %10.1f %10.1f %10.1f\n", nomesPref[j], pessoas[pos1].notas[j], pessoas[pos2].notas[j], diff);
-		//aproveita o mesmo laço pra já ir guardando a menor diferença encontrada
 		if (menorDiferenca == -1 || diff < menorDiferenca) {
 			menorDiferenca = diff;
 		}
@@ -359,9 +375,8 @@ void AnalisarPreferencias(Pessoa pessoas[], int quant) {
 	formt(1);
 	printf ("Preferencias mais semelhantes:\n");
 
-	//percorre de novo para listar todas as que empataram no menor valor
 	for (int j = 0; j < QTD_PREF; j++) {
-		if (diferencas[j] == menorDiferenca) {
+		if (fabs(diferencas[j] - menorDiferenca) < 0.0001f) {
 			printf ("%s\n", nomesPref[j]);
 		}
 	}

@@ -1,0 +1,49 @@
+Pendente no relatório
+a) Por que uma matriz é adequada para armazenar as notas na primeira versão?✔️
+    R- Porque organiza os dados de forma bidimensional (como uma planilha ou tabela), permitindo correlacionar diretamente um conjunto fixo de características (preferências)
+     a cada elemento cadastrado (pessoas) por meio de índices. 
+
+b) O que representa uma linha da matriz?✔️
+    R- Representa uma pessoa cadastrada (o índice da linha corresponde ao índice da pessoa no vetor de nomes).
+
+c) O que representa uma coluna?✔️
+    R- Representa uma categoria de preferência específica (Música, Cinema, Jogos, etc.).
+
+d) Por que uma distância euclidiana menor indica maior semelhança?✔️
+    R- Porque cada vetor de notas funciona como as coordenadas de um ponto em um espaço geométrico. Quanto menores forem as diferenças entre as notas de duas pessoas, 
+    mais próximos esses pontos estarão no espaço, resultando em uma distância menor e, portanto, em maior afinidade de perfis.
+
+e) Qual é a principal dificuldade de manter nomes e notas em estruturas paralelas?✔️
+    R-A falta de vínculo formal entre os dados. Como a relação depende unicamente do índice (nomes[i] e notas[i]), qualquer ordenação ou manipulação que altere a 
+    posição de um vetor sem atualizar o outro faz o sistema associar as notas de uma pessoa ao nome de outra.
+
+f) Que problema a `struct Pessoa` resolve?✔️
+
+    R- Resolve o problema de sincronização entre estruturas paralelas, que enfrentamos nas versões anteriores. Ao agrupar nome e notas em um único registro, garantimos
+     que os dados de uma pessoa fiquem sempre vinculados entre si, eliminando o risco de operações (como ordenações ou reorganizações) desalinharem o nome de uma pessoa das 
+     notas de outra.
+
+    
+g) Qual é a diferença entre:✔️
+
+Pessoa pessoas[30]; e um vetor de pessoas criado com `malloc`?
+    
+    R- No primeiro caso, o vetor tem tamanho fixo definido em tempo de compilação e é alocado na pilha (stack): a memória para as 30 pessoas é reservada automaticamente
+     assim que a função começa a executar, e liberada automaticamente quando ela termina. Já um vetor criado com malloc é alocado dinamicamente no heap, em tempo de execução, 
+     permitindo que o tamanho seja definido conforme a necessidade real (por exemplo, a quantidade de pessoas informada pelo usuário). Essa flexibilidade tem um custo: 
+     a responsabilidade de liberar essa memória manualmente com free() passa a ser do programador, e a alocação também deve ser verificada quanto a falhas (ponteiro NULL).
+    
+h) Qual é a diferença conceitual entre: ❌
+
+    Pessoa *p; e  Pessoa p;
+    
+    R-
+
+i) Por que um vetor de ponteiros pode ser útil para gerar o ranking sem modificar a ordem do cadastro? ❌
+    R-
+
+j) Em quais momentos do programa a memória dinâmica precisa ser liberada? ✔️
+
+    R-No encerramento do programa: Os dados principais (nomes e notas) devem ser liberados com free() no final da main (ou na opção 0 de saída) 
+    para evitar vazamento de memória (memory leak) e Ao final de funções auxiliares: Vetores temporários usados apenas para cálculos internos (como distancias e indices no 
+    ranking) devem receber free() antes do retorno da própria função para não acumular lixo na memória a cada execução.
