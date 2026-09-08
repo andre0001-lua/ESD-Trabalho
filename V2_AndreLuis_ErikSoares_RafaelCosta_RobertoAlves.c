@@ -48,7 +48,6 @@ int BuscaPessoa(char (*nomes)[TAM_NOME], int quant) {
     }
 
     char nomebuscando[TAM_NOME];
-    while (getchar() != '\n');
     printf("Digite o nome que deseja buscar: ");
     scanf("%49[^\n]", nomebuscando);
     while (getchar() != '\n');

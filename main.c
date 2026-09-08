@@ -46,6 +46,7 @@ int main() {
         opcoes();
         printf("Digite a opção desejada: ");
         scanf("%d", &menu);
+        while (getchar() != '\n');   
         formt(1);
 
         switch (menu) {
