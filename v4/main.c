@@ -39,7 +39,7 @@ int main() {
 
         switch (opcao) {
             case 1:
-                CadastrarPessoas(pessoas, &quant);
+                CadastrarPessoas(pessoas, &quant, capacidade);
                 break;
 
             case 2:
