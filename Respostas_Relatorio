@@ -33,14 +33,20 @@ Pessoa pessoas[30]; e um vetor de pessoas criado com `malloc`?
      permitindo que o tamanho seja definido conforme a necessidade real (por exemplo, a quantidade de pessoas informada pelo usuário). Essa flexibilidade tem um custo: 
      a responsabilidade de liberar essa memória manualmente com free() passa a ser do programador, e a alocação também deve ser verificada quanto a falhas (ponteiro NULL).
     
-h) Qual é a diferença conceitual entre: ❌
+h) Qual é a diferença conceitual entre: ✔️
 
     Pessoa *p; e  Pessoa p;
     
-    R-
+    R-No primeiro caso, p é um ponteiro: uma variável que armazena apenas o endereço de memória onde uma Pessoa está guardada, e não a struct em si. Ele precisa ser inicializado
+    apontando para um endereço válido (seja de outra variável já existente, seja de memória alocada com malloc) antes de ser usado, e seus campos são acessados com o operador seta 
+    (p->nome). Já no segundo caso, p é a própria struct: o espaço para armazenar o nome e as notas já é reservado no momento da declaração, e o acesso aos campos é feito diretamente 
+    com ponto (p.nome). Em resumo, Pessoa p é o dado, enquanto Pessoa *p é apenas uma referência para onde esse dado está.
 
-i) Por que um vetor de ponteiros pode ser útil para gerar o ranking sem modificar a ordem do cadastro? ❌
-    R-
+i) Por que um vetor de ponteiros pode ser útil para gerar o ranking sem modificar a ordem do cadastro? ✔️
+    R-Porque cada posição do vetor de ranking armazena apenas o endereço de uma Pessoa que já existe no vetor original, em vez de copiar a struct inteira ou depender de um índice 
+    numérico. Dessa forma, para ordenar o ranking por afinidade basta trocar os ponteiros de posição entre si — nunca as pessoas em si — o que deixa o vetor de cadastro original 
+    completamente intacto, preservando a ordem em que cada pessoa foi cadastrada. Além disso, trocar apenas ponteiros é mais eficiente do que trocar structs inteiras a cada passo da 
+    ordenação, já que o ponteiro tem tamanho fixo independente do tamanho da struct que representa.
 
 j) Em quais momentos do programa a memória dinâmica precisa ser liberada? ✔️
 
